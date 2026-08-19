@@ -3,7 +3,7 @@ package model
 import (
 	"time"
 
-	db "github.com/HirunikaGunathunga/GO_REST/database"
+	db "github.com/HirunikaGunathunga/GO_REST/Database"
 )
 
 type Event struct {
@@ -12,10 +12,10 @@ type Event struct {
 	Description string    `json:"description" binding:"required"`
 	Location    string    `json:"location" binding:"required"`
 	DateTime    time.Time `json:"dateTime" binding:"required"`
-	UserId      int       `json:"userId"`
+	UserId      int64     `json:"userId"`
 }
 
-func (e Event) Save() error {
+func (e *Event) Save() error {
 	//later DB
 	//events = append(events, e)
 	query := `INSERT INTO EVENT_TAB (name, description, location, dateTime, userId) VALUES (?, ?, ?, ?, ?)`

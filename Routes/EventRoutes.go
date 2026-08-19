@@ -36,6 +36,7 @@ func getEventById(context *gin.Context) {
 }
 
 func createEvents(context *gin.Context) {
+
 	var e model.Event
 	err := context.ShouldBindJSON(&e)
 	if err != nil {
@@ -43,8 +44,9 @@ func createEvents(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse the action"})
 		return
 	}
+	userId := context.GetInt64("userId")
 	//e.ID = 1
-	//e.UserId = 1
+	e.UserId = userId
 	err = e.Save()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not create the event"})
@@ -63,9 +65,16 @@ func updateEventById(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"message:": "Cannot not parse event id. Try again"})
 		return
 	}
-	_, err = model.GetEventById(eventId)
+
+	userId := context.GetInt64("userId")
+	event, err := model.GetEventById(eventId)
+
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message:": "Cannot not fetch event id. Try again"})
+		return
+	}
+	if event.UserId != userId {
+		context.JSON(http.StatusUnauthorized, gin.H{"message:": "Cannot not update event. Try again"})
 		return
 	}
 	var updateEvent model.Event
@@ -94,9 +103,14 @@ func deleteEventById(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"message:": "Cannot not parse event id. Try again"})
 		return
 	}
+	userId := context.GetInt64("userId")
 	deleteEvent, err := model.GetEventById(eventId)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message:": "Cannot not fetch event id. Try again"})
+		return
+	}
+	if deleteEvent.UserId != userId {
+		context.JSON(http.StatusUnauthorized, gin.H{"message:": "Cannot not Delete event. Try again"})
 		return
 	}
 

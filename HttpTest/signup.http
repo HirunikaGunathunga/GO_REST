@@ -1,0 +1,8 @@
+POST http://localhost:8080/SignUp
+Content-Type: application/json
+
+{
+    "email" : "hirunik.gunathunga@ifs.com",
+    "password" : "FuckIFS#2"
+    
+}

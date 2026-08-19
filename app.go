@@ -1,8 +1,9 @@
 package main
 
 import (
+	db "github.com/HirunikaGunathunga/GO_REST/Database"
 	routes "github.com/HirunikaGunathunga/GO_REST/Routes"
-	db "github.com/HirunikaGunathunga/GO_REST/database"
+
 	"github.com/gin-gonic/gin"
 )
 

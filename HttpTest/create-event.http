@@ -1,10 +1,11 @@
 POST http://localhost:8080/Events
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhpcnVuaWthLmd1bmF0aHVuZ2FAaWZzLmNvbSIsImV4cCI6MTc4NzE3MjA0NSwidXNlcklkIjoxfQ.KS7hnHUxiRmtANylwHoarNcLTAPeuaMfBlCqu66eZGQ
 
 {
-    "name" : "First Event",
-    "description" : "First Description",
-    "location" : "Location Unknown",
-    "datetime" : "2025-08-18T18:40:00.000Z",
-    "userId" : 2
+    "name" : "First UPDATED Event",
+    "description" : "First3 Description",
+    "location" : "Location3 Unknown",
+    "datetime" : "2025-08-18T18:41:00.000Z"
+    
 }
