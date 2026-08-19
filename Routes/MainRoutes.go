@@ -7,4 +7,5 @@ func MainRoutes(server *gin.Engine) {
 	server.GET("/Events/:id", getEventById)
 	server.POST("/Events", createEvents)
 	server.PUT("/Events/:id", updateEventById)
+	server.DELETE("/Events/:id", deleteEventById)
 }
